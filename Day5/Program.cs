@@ -6,7 +6,14 @@ namespace Day5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Part1();
+        }
+
+        static void Part1()
+        {
+            var intCodeComputer = new IntCodeComputerV2(@"input.txt");
+
+            var list = intCodeComputer.ParseList();
         }
     }
 }
