@@ -15,13 +15,10 @@ namespace Day2
             this.ReadList(path);
         }
 
-        /// <summary>
-        /// only for the 'real' assignment
-        /// </summary>
-        internal void DoRepaceBefore()
+        internal void InitNounAndVerb(int noun, int verb)
         {
-            originalList[1] = 12;
-            originalList[2] = 2;
+            originalList[1] = noun;
+            originalList[2] = verb;
         }
 
         internal void ReadList(string path)
@@ -76,47 +73,10 @@ namespace Day2
                 case 2:
                     workList[resultpointer] = waarde1 * waarde2;
                     break;
-                case 99: return false;
                 default: throw new ArgumentException("Oops, this isn't suppose to happen.");
             }
 
             return true;
-        }
-
-        public void Part2()
-        {
-            for (int noun = 0; noun < 100; noun++)
-            {
-                for (int verb = 0; verb < 100; verb++)
-                {
-                    var worklist = new List<int>(originalList);
-                    worklist[1] = noun;
-                    worklist[2] = verb;
-
-                    int instructionPointer = 0;
-                    while (worklist[instructionPointer] != 99)
-                    {
-                        int opcode = worklist[instructionPointer];
-
-                        if (opcode == 1)
-                        {
-                            worklist[worklist[instructionPointer + 3]] = worklist[worklist[instructionPointer + 2]] + worklist[worklist[instructionPointer + 1]];
-                        }
-                        else if (opcode == 2)
-                        {
-                            worklist[worklist[instructionPointer + 3]] = worklist[worklist[instructionPointer + 2]] * worklist[worklist[instructionPointer + 1]];
-                        }
-
-                        instructionPointer += 4;
-                    }
-
-                    if (worklist[0] == 19690720)
-                    {
-                        Console.WriteLine(100 * noun + verb);
-                        return;
-                    }
-                }
-            }
         }
     }
 }

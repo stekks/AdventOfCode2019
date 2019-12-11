@@ -7,16 +7,39 @@ namespace Day2
     {
         static void Main(string[] args)
         {
+            Part2();
+        }
+
+        static void Part1()
+        {
             var intCodeComputer = new IntCodeComputer(@"input.txt");
 
-            //intCodeComputer.DoRepaceBefore();
-            //var list = intCodeComputer.ParseList();
+            intCodeComputer.InitNounAndVerb(12, 2);
+            var list = intCodeComputer.ParseList();
 
-            //PrintList(list);
+            PrintList(list);
 
-            //Console.WriteLine(list[0]);
-            //intCodeComputer.FindNounAndVerb(19690720);
-            intCodeComputer.Part2();
+            Console.WriteLine(list[0]);
+        }
+
+        static void Part2()
+        {
+            var intCodeComputer = new IntCodeComputer(@"input.txt");
+
+            for (int noun = 0; noun < 100; noun++)
+            {
+                for (int verb = 0; verb < 100; verb++)
+                {
+                    intCodeComputer.InitNounAndVerb(noun, verb);
+                    var list = intCodeComputer.ParseList();
+
+                    if (list[0] == 19690720)
+                    {
+                        Console.WriteLine(100 * noun + verb);
+                        return;
+                    }
+                }
+            }
         }
 
         static void PrintList<T>(List<T> list)
